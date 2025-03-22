@@ -37,6 +37,11 @@ app.delete('/channels/:id', (req, res) => {
     res.json({ message: "Channel deleted" });
 });
 
+// Root API message (Optional)
+app.get('/', (req, res) => {
+    res.send("Welcome to the IPTV Backend API!");
+});
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
