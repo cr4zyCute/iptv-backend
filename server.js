@@ -13,6 +13,12 @@ let channels = [
         url: "https://livetv-fa.tubi.video/outsidetv2/playlist.m3u8"
     }
 ];
+const corsOptions = {
+    origin: "*", // Allow all domains
+    methods: "GET,POST,DELETE",
+    allowedHeaders: "Content-Type"
+};
+app.use(cors(corsOptions));
 
 // Get all channels
 app.get('/channels', (req, res) => {
@@ -22,8 +28,8 @@ app.get('/channels', (req, res) => {
 // Add a new channel
 app.post('/channels', (req, res) => {
     const { name, url } = req.body;
-    if (!name || !url) {
-        return res.status(400).json({ error: "Name and URL are required" });
+    if (!name || !url || !url.startsWith("http")) {
+        return res.status(400).json({ error: "Valid name and URL are required" });
     }
     const newChannel = { id: channels.length + 1, name, url };
     channels.push(newChannel);
