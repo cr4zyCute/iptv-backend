@@ -17,6 +17,7 @@ let channels = [
 // Get all channels
 app.get('/channels', (req, res) => {
     res.json(channels);
+    res.send("Welcome to the IPTV Backend API!");
 });
 
 // Add a new channel
